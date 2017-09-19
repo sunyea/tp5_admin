@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{$Think.config.webinfo.sname}-后台管理</title>
+	<link rel="stylesheet" href="/static/plugin/layui/css/layui.css">
+	<script src="/static/plugin/jquery.js"></script>
+	<script src="/static/plugin/layui/layui.js"></script>
+	<script src="/static/js/admin/login.js"></script>
+	<style type="text/css">
+		html,body{font-size:13px;font-family:"Microsoft YaHei UI", "微软雅黑", "宋体";height: 100%;}
+		.head{width: 100%;height: 95px;background-color: #2F4056;position: fixed;left: 0;top: 0;color: #fff;overflow: hidden;}
+		.logo{width: 420px;float: left;height: 100%;text-align: right;}
+		.head-title{float: left;height: 100%;margin-left: 50px;font-size:40px;line-height: 95px;}
+		.foot{width: 100%;height: 50px;background-color: #2F4056;position: fixed;left: 0;bottom: 0;color: #fff;text-align: center;line-height: 20px;border-top: 1px solid #fff;}
+		.mainbody{width: 100%;background-color: #000;background-image: url(/static/images/login_bg.jpg);background-repeat:no-repeat;background-position: left|bottom; height:100%;}
+		.login-form{width: 450px;height: 200px;position: absolute;left:0;right:0;top:0;bottom:0;margin: auto;background-color: rgba(0,34,59,0.5);padding: 20px;color: #fff;border-radius:5px;border: 1px solid #fff;z-index: 2;}
+	</style>
+</head>
+<body>
+	<div class="head">
+		<div class="logo"><img src="/static/images/logo1_420_95.png"/></div>
+		<div class="head-title">{$Think.config.webinfo.sname}后台管理系统</div>
+	</div>
+	<div class="mainbody">
+		<div class="login-form">
+			<form class="layui-form" method="post">
+				<div class="layui-form-item">
+			    <label class="layui-form-label">登录账号</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="user_id" lay-verify="uname" placeholder="管理员账号" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">登录密码</label>
+			    <div class="layui-input-inline">
+			      <input type="password" name="user_pwd" lay-verify="upwd" placeholder="请输入密码" class="layui-input">
+			    </div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label">验 证 码</label>
+			    <div class="layui-input-inline">
+			      <input type="text" name="captcha" lay-verify="captcha" class="layui-input">
+			    </div>
+			    <div class="layui-form-mid"><img id="captchaimg" src="/captcha.html" title="点击刷新" style="width:120px;height:35px;" onclick="this.src='/captcha.html?time=' + Math.random();"></div>
+			  </div>
+			  <div class="layui-form-item">
+			    <label class="layui-form-label"> </label>
+			    <div class="layui-input-inline">
+			      <button lay-submit class="layui-btn  layui-btn-danger" lay-filter="login" id="bt_login">立即登录</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+	</div>
+	<div class="foot">
+		Copyright&copy;2017-2024 {$Think.config.webinfo.name}<br/>
+		本系统必须使用IE9+，360安全浏览器，Chrome浏览器才能正常使用
+	</div>
+	<script type="text/javascript" color="255,255,255" opacity='0.7' zIndex="1" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.1/canvas-nest.min.js"></script>
+</body>
+</html>

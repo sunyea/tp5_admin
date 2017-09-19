@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>权限管理</title>
+	<link rel="stylesheet" href="/static/plugin/layui/css/layui.css">
+	<link rel="stylesheet" href="/static/plugin/iconadmin/iconfont.css">
+	<link rel="stylesheet" href="/static/css/global.css">
+	<script src="/static/plugin/jquery.js"></script>
+	<script src="/static/plugin/layui/layui.js"></script>
+	<script src="/static/js/admin/rule.js?t={php}echo date('U'){/php}"></script>
+</head>
+<body>
+<!-- 顶部管理栏 -->
+<div class="admin-top-form">
+	<form class="layui-form layui-form-pane" method="post">
+	<div class="layui-form-item">
+		<div class="layui-inline">
+			<div class="layui-btn-group">
+				<button type="button" id="add" class="layui-btn layui-btn-small layui-btn-primary"><i class="iconadmin iconadmin-roundaddlight"></i> 增加</button>
+				<button type="button" id="delall" class="layui-btn layui-btn-small layui-btn-primary"><i class="iconadmin iconadmin-delete_light"></i> 删除选中</button>
+			</div>
+		</div>
+		<div class="layui-inline" style="float:right;">
+			<div class="layui-input-inline" style="width:200px;">
+				<input type="text" name="keyword" value="{$keyword}" lay-filter="keyword" placeholder="搜索关键字" class="layui-input" style="height: 30px;">
+			</div>
+			<div class="layui-input-inline">
+				<button lay-submit lay-filter="search" class="layui-btn layui-btn-small layui-btn-primary"><i class="iconadmin iconadmin-search_light"></i> 搜索</button>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+<!-- 顶部结束 -->
+<div class="admin-main-table layui-form">
+	<table class="layui-table" lay-skin="line">
+		<colgroup>
+			<col width="50">
+			<col width="150">
+			<col width="300">
+			<col width="200">
+			<col width="100">
+			<col width="100">
+			<col>
+		</colgroup>
+		<thead>
+			<tr>
+				<th><input type="checkbox" lay-skin="primary" lay-filter="allChoose"></th>
+				<th>名称</th>
+				<th>权限地址</th>
+				<th>附加判断</th>
+				<th>状态</th>
+				<th>排序</th>
+				<th>管理</th>
+			</tr>
+		</thead>
+		<tbody>
+		{volist name='list' id='rule'}
+			<tr ruleid="{$rule.id}">
+				<td><input type="checkbox" name="ruleid" value="{$rule.id}" lay-skin="primary"></td>
+				<td>{$rule.title|str_replace=$keyword,"<span class='keyword'>$keyword</span>",###}</td>
+				<td>{$rule.name|str_replace=$keyword,"<span class='keyword'>$keyword</span>",###}</td>
+				<td>{$rule.condition}</td>
+				<td>{$rule.status}</td>
+				<td>{$rule.order}</td>
+				<td>
+					<div class="layui-btn-group">
+						<button type="button" class="layui-btn layui-btn-small admin-update"><i class="iconadmin iconadmin-writefill"></i> 修改</button>
+						<button type="button" class="layui-btn layui-btn-small admin-del"><i class="iconadmin iconadmin-deletefill"></i> 删除</button>
+					</div>
+				</td>
+			</tr>
+		{/volist}
+		</tbody>
+	</table>
+	{$list->render()}
+</div>
+
+</body>
+</html>

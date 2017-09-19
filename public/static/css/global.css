@@ -1,0 +1,9 @@
+/*通用*/
+html,body{font-size:13px;font-family:"Microsoft YaHei UI", "微软雅黑", "宋体";}
+.keyword{color:#f00;}
+
+/*管理列表顶部菜单*/
+.admin-top-form{padding-top: 10px;padding-left: 20px;}
+.admin-main-table{padding-left: 5px;}
+.admin-body{margin:5px;}
+#page{float:right;margin-right: 20px;}

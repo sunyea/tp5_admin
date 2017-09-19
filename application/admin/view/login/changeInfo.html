@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>changeInfo</title>
+	<link rel="stylesheet" href="/static/plugin/layui/css/layui.css">
+	<script src="/static/plugin/jquery.js"></script>
+	<script src="/static/plugin/layui/layui.js"></script>
+</head>
+<body style="padding:5px;">
+<form action="" method="post" class="layui-form layui-form-pane">
+	<div class="layui-form-item">
+		<label class="layui-form-label">账号</label>
+		<div class="layui-input-block">
+			<input type="text" name="user_id" class="layui-input" value="{$manager.user_id}" disabled>
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">姓名</label>
+		<div class="layui-input-block">
+			<input type="text" name="name" class="layui-input" lay-verify="required" value="{$manager.name}">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">邮箱</label>
+		<div class="layui-input-block">
+			<input type="text" name="email" class="layui-input" lay-verify="email" value="{$manager.email}">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label">头像</label>
+		<div class="layui-input-block">
+			<input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="heard">
+			<input type="hidden" name="heard" value="{$manager.heard}">
+			{if condition="$manager.heard == ''"}
+			<img id="heardimg" class="layui-circle" src="/static/images/head200_200.jpg" style="width:40px;height:40px;" />
+			{else/}
+			<img id="heardimg" class="layui-circle" src="{$manager.heard}" style="width:40px;height:40px;" />
+			{/if}
+			<input type="file" name="heardfile" class="layui-upload-file">
+		</div>
+	</div>
+	<div class="layui-form-item">
+		<label class="layui-form-label"> </label>
+		<div class="layui-input-inline">
+			<button class="layui-btn" lay-submit lay-filter="change_info">马上修改</button>
+			<button type="button" class="layui-btn" id="btnclose">关闭窗口</button>
+		</div>
+	</div>
+</form>
+<script>
+layui.use(['form','layer','upload'], function(){
+	var form = layui.form()
+	layer = layui.layer;
+
+	//上传头像
+	layui.upload({
+		url:'/admin/login/upheard',
+		title:'上传头像',
+		success:function(res){
+			if (res.code == '1') {
+				$("#heardimg").attr("src",res.file);
+				$("input[name='heard']").val(res.file);
+			}else{
+				layer.alert(res.msg);
+			}
+		}
+	});
+	
+	//提交
+	form.on('submit(change_info)', function(data){
+		$.post('/admin/login/changeinfo', data.field, function(rt, status){
+			if (rt.code == '1') {
+				layer.msg(rt.msg, {icon:1, time:1000});
+			}else{
+				layer.msg(rt.msg, {icon:2, time:1000});
+			}
+		});
+		return false;
+	});
+
+	//关闭
+	$('#btnclose').click(function(){
+		parent.layer.closeAll();
+	})
+
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>welcome</title>
+	<link rel="stylesheet" href="/static/plugin/layui/css/layui.css">
+	<script src="/static/plugin/jquery.js"></script>
+	<script src="/static/plugin/layui/layui.js"></script>
+</head>
+<body>
+<blockquote class="layui-elem-quote"><h1>{$Think.config.webinfo.sname}-后台管理系统</h1></blockquote>
+<div class="layui-collapse">
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">系统提示</h2>
+		<div class="layui-colla-content layui-show">
+			欢迎{$Think.session.manager.name}第{$Think.session.manager.count}次登录本系统，你上次在{$Think.session.manager.ip}({$Think.session.manager.local})于{$Think.session.manager.time}登录本系统，如果登录地址异常，请您及时修改密码！<br/>
+			修改密码和个人资料在系统界面右上方！
+		</div>
+	</div>
+	<div class="layui-colla-item">
+		<h2 class="layui-colla-title">版权说明</h2>
+		<div class="layui-colla-content layui-show">
+			本系统由“德阳商易网络科技有限责任公司”开发，拥有自主知识产权，不经许可不得用于商务用途！
+		</div>
+	</div>
+</div>
+<script>
+layui.use(['layer', 'element'], function(){
+	var layer = layui.layer,
+	element = layui.element();
+});
+
+</script>
+</body>
+</html>
